@@ -2,7 +2,6 @@
 // Create simple 3d highway enviroment using PCL
 // for exploring self-driving car sensors
 
-//#include "render/render.h"
 #include "highway.h"
 
 int main(int argc, char** argv)
@@ -37,7 +36,9 @@ int main(int argc, char** argv)
 		viewer->spinOnce(1000/frame_per_sec);
 		frame_count++;
 		time_us = 1000000*frame_count/frame_per_sec;
-		
 	}
+
+    // print out NIS values
+    for (auto &car : highway.traffic) car.ukf.printNIS();
 
 }

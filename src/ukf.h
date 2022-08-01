@@ -3,6 +3,7 @@
 
 #include "Eigen/Dense"
 #include "measurement_package.h"
+#include <vector>
 
 class UKF {
  public:
@@ -95,6 +96,26 @@ class UKF {
 
   // Sigma point spreading parameter
   double lambda_;
+
+  // print out the lidar & radar NIS values
+  void printNIS();
+
+private:
+
+    // radar measurement dimension
+    int n_ldr_;
+
+    // radar measurement dimension
+    int n_rdr_;
+
+    // Number of sigma points
+    int n_sigma_;
+
+    // lidar & radar NIS collections
+    std::vector<double> nis_laser, nis_radar;
+
+    void UpdateStateAndCovariance(Eigen::MatrixXd &S, Eigen::MatrixXd &Z, const MeasurementPackage &meas_package);
+
 };
 
 #endif  // UKF_H
